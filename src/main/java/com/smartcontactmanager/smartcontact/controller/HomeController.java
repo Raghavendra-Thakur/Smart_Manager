@@ -31,11 +31,6 @@ public class HomeController {
         return "home";
     }
 
-    @RequestMapping("/about")
-    public String aboutController() {
-
-        return "about";
-    }
 
     @RequestMapping("/singup")
     public String singupController(Model model) {
