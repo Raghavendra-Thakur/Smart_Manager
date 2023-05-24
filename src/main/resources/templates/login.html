@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="base::layout(~{::section})"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home Page</title>
+  </head>
+  <body>
+    <section  class="banner d-flex justify-content-center align-items-center">
+      <div
+        class="col-md-4 offset-md-4 me-auto  "
+      >
+      <div class="my-card pt-5 pb-5 rounded-2">
+        <div
+        class="text-center alert" 
+        th:if="${session.message}"
+        th:classappend="${session.message.type}"
+         role="alert">
+         <p th:text="${session.message.content}"></p>
+         <th:block th:text="${@removesession.removeVerificationMessageFromSession()}"></th:block>
+        </div>
+        
+        <form class="row g-5" th:action="@{/dologin}" method="post" >
+          <div class="col-md-8 offset-md-2 ">
+			<h1 class="text-center">Log In</h1> 
+			
+			<div th:if="${param.error}" class="alert alert-danger">
+				Invaid username password
+			</div>
+			<div th:if="${param.logout}" class="alert alert-danger">
+				logedout
+			</div>
+			
+            <div class= "form-grop pb-2">
+              <label for="inputEmail4" class="form-label">Email</label>
+              <input
+                type="email"
+                class="form-control"
+                name="username"
+                id="inputEmail4"
+              />
+             
+            <div class=" form-grop pb-2 ">
+              <label for="inputPassword4" class="form-label mt-2">Password</label>
+              <input
+                type="password"
+                class="form-control"
+                name="password"  
+                id="inputPassword4"
+              />
+              
+          <div class=" form-grop text-center mt-4 ">
+            <button type="submit" class="btn btn-primary me-5">Log in</button>
+
+          </div>
+        </form>
+      </div>
+      </div>
+    </section>
+  </body>
+</html>

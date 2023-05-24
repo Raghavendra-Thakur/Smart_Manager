@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="normal/base::layout(~{::section})">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+	<section>
+	<div class="alert container mx-4" 
+		th:if="${session.message}"
+	 	th:classappend="${session.message.type}" 
+	 	role="alert">
+  		<span th:text="${session.message.content}"></span>
+  		
+  		<th:block th:text="${@removesession.removeVerificationMessageFromSession()}"></th:block>
+	</div>
+	
+    	<h1>Add contact</h1>
+    	
+    	<div
+        class="col-md-8 offset-md-2 me-auto  "
+      >
+      <div class="my-card pt-5 pb-5 rounded-2">
+        
+        <h1 class="text-center">Add Contact Details</h1>
+        <form class="row g-5"  enctype="multipart/form-data" th:action="@{/user/addcontactpro}" method="post" th:object="${contact}">
+          <div class="col-md-8 offset-md-2 ">
+           
+            <div class=" m-4 form-grop ">
+              <label for="inputName"  class="form-label">Name</label>
+              <input
+                type="text"
+                class="form-control "
+                id="inputName"
+                name="cname"
+                th:classappend="${#fields.hasErrors('cname') ? 'is-invalid':''}"
+                th:value="${contact.cname}"
+              />
+              <div class="invalid-feedback"  th:each=" er: ${#fields.errors('cname')}" th:text="${er}"></div>
+            </div>
+            
+            
+            <div class= "form-grop m-4">
+              <label for="inputEmail4" class="form-label">Email</label>
+              <input
+                type="email"
+                class="form-control"
+                name="cemail"
+                th:classappend="${#fields.hasErrors('cemail') ? 'is-invalid':''}"
+                th:value="${contact.cemail}"
+                id="inputEmail4"
+              />
+              <div class="invalid-feedback"  th:each=" er: ${#fields.errors('cemail')}" th:text="${er}"></div>
+            </div>
+            
+             <div class=" m-4 form-grop ">
+              <label for="inputNName"  class="form-label">Nick Name</label>
+              <input
+                type="text"
+                class="form-control "
+                id="inputNName"
+                name="cnickname"
+                th:classappend="${#fields.hasErrors('cnickname') ? 'is-invalid':''}"
+                th:value="${contact.cnickname}"
+              />
+              <div class="invalid-feedback"  th:each=" er: ${#fields.errors('cnickname')}" th:text="${er}"></div>
+            </div>
+            
+             <div class=" m-4 form-grop ">
+              <label for="inputPhone"  class="form-label">Phone No</label>
+              <input
+                type="text"
+                class="form-control "
+                id="inputPhone"
+                name="phone"
+                th:classappend="${#fields.hasErrors('phone') ? 'is-invalid':''}"
+                th:value="${contact.phone}"
+              />
+              <div class="invalid-feedback"  th:each=" er: ${#fields.errors('phone')}" th:text="${er}"></div>
+            </div>
+           
+            <div class=" form-grop p-4">
+              <label for="about" class="form-label">About Contact</label>
+              <textarea 
+              id="mytextarea"
+              class="form-control" 
+              name="about" 
+              th:classappend="${#fields.hasErrors('about') ? 'is-invalid':''}"
+              th:value="${contact.about}"
+              rows="10"></textarea>
+              <div class="invalid-feedback"  th:each=" er: ${#fields.errors('about')}" th:text="${er}"></div>
+            </div>
+            
+             <div class=" m-4 form-grop ">
+              <label for="inputFile"  class="form-label">Image</label>
+              <input
+                type="file"
+                class="form-control "
+                id="inputFile"
+                name="profileimage"
+              />
+            </div>
+            
+           
+       
+          <div class=" form-grop col-12 text-center">
+            <button type="submit" class="btn btn-primary me-5">Add Contact</button>
+            <button type="reset" class="btn btn-danger">Reset</button>
+          </div>
+        </form>
+      </div>
+      </div>
+   
+    </section>
+  
+</body>
+</html>
